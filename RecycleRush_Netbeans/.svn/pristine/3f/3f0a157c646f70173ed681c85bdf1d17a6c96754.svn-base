@@ -1,0 +1,61 @@
+package edu.wpi.first.wpilibj.templates.commands;
+
+import edu.wpi.first.wpilibj.templates.Robot;
+
+import edu.wpi.first.wpilibj.command.Command;
+ 
+
+/**
+ *
+ */
+public class HaloDrive extends Command {
+
+  public HaloDrive() {
+        // Use requires() here to declare subsystem dependencies
+        requires(Robot.chassis);
+    }
+
+    // Called just before this Command runs the first time
+    protected void initialize() {
+    }
+
+    // Called repeatedly when this Command is scheduled to run
+    protected void execute() {
+    	double forwardPower = -Robot.oi.driverLeftStick.getDeadY();
+    	double turnMod = Robot.oi.driverRightStick.getDeadX();
+    	double leftPower = forwardPower;
+    	double rightPower = forwardPower; 
+    	
+    	if (forwardPower < 0) { //switches directions when moving backwards
+    		turnMod *= -1;
+    	}
+    	
+    	if (turnMod > 0) {    		//reduce power of opposite side by the turnMod
+    		rightPower *= 1 - Math.abs(turnMod);
+    	}
+    	if (turnMod < 0) { 
+    		leftPower *= 1 - Math.abs(turnMod); 
+    	}
+    	if (forwardPower == 0) {  //if forward = 0, then zero point turn 		 
+			leftPower = turnMod;
+			rightPower = -turnMod;    		   		
+    	}
+    	
+    	Robot.chassis.drive(leftPower,rightPower);
+    }
+
+    // Make this return true when this Command no longer needs to run execute()
+    protected boolean isFinished() {
+        return false;
+    }
+
+    // Called once after isFinished returns true
+    protected void end() {
+    	Robot.chassis.drive(0,0); // stop motors when not using joystick
+    }
+
+    // Called when another command which requires one or more of the same
+    // subsystems is scheduled to run
+    protected void interrupted() {
+    }
+}
