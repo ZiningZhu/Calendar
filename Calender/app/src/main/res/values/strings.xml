@@ -1,6 +1,20 @@
 <resources>
     <string name="app_name">Calender</string>
 
+    <string name="Monday_string">Mon</string>
+    <string name="Tuesday_string">Tue</string>
+    <string name="Wednesday_string">Wed</string>
+    <string name="Thursday_string">Thu</string>
+    <string name="Friday_string">Fri</string>
+    <string name="Saturday_string">Sat</string>
+    <string name="Sunday_string">Sun</string>
+
+    <string name="dayViewActivity">Day</string>
+    <string name="monthViewActivity">Month</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_day_view">DayViewActivity</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_month">Month</string>
+    
 </resources>
